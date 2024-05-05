@@ -1,0 +1,215 @@
+import { React } from 'react';
+import './GuessCard.css';
+
+function GuessCard() {
+    return (
+        <div className="card">
+            <p className="nameflag">Name That Flag!</p>
+            <div className="img-container">
+                <img src="\src\flag-images\country-flags-main\png1000px\pk.png" alt="Pakistan Flag" />
+            </div>
+            <div class="grid-container">
+                <div class="grid-item">Turkey</div>
+                <div class="grid-item">Pakistan</div>
+                <div class="grid-item">United-State</div>
+                <div class="grid-item">Bangladesh</div>
+            </div>
+            <button className='nextbtn'>Next</button>
+        </div>
+    );
+}
+
+export default GuessCard;
+///////////////////////////////
+///////////////////////////////
+////////////////////////
+//////////////////////////
+///////////////////////////////////
+import React, { useState, useEffect } from 'react';
+import './GuessCard.css';
+
+
+import pkImage from './flag-images/country-flags-main/png1000px/pk.png'; 
+import phImage from './flag-images/country-flags-main/png1000px/ph.png'; 
+import psImage from './flag-images/country-flags-main/png1000px/ps.png'; 
+import nzImage from './flag-images/country-flags-main/png1000px/nz.png'; 
+/////////
+import arImage from './flag-images/country-flags-main/png1000px/ar.png';
+import yeImage from './flag-images/country-flags-main/png1000px/ye.png';
+import bdImage from './flag-images/country-flags-main/png1000px/bd.png';
+import brImage from './flag-images/country-flags-main/png1000px/br.png'; 
+////////
+import esImage from './flag-images/country-flags-main/png1000px/es.png';
+import gbImage from './flag-images/country-flags-main/png1000px/gb.png';
+import inImage from './flag-images/country-flags-main/png1000px/in.png';
+import itImage from './flag-images/country-flags-main/png1000px/it.png'; 
+////////
+import jpImage from './flag-images/country-flags-main/png1000px/jp.png';
+import cnImage from './flag-images/country-flags-main/png1000px/cn.png';
+import ruImage from './flag-images/country-flags-main/png1000px/ru.png';
+import myImage from './flag-images/country-flags-main/png1000px/my.png'; 
+///////
+function GuessCard() {
+    const [flags, setFlags] = useState([
+        { country: 'Pakistan', image: pkImage }, // Use imported image files
+        { country: 'New Zealand', image: nzImage },
+        { country: 'Philippines', image: phImage },
+        { country: 'Palastine', image: psImage },
+        // Add more flag data as needed
+        { country: 'Argentina', image: arImage },
+        { country: 'Yemen', image: yeImage },
+        { country: 'Bangladesh', image: bdImage },
+        { country: 'Brazil', image: brImage },
+        /////////
+        { country: 'Spain', image: esImage },
+        { country: 'Britain', image: gbImage },
+        { country: 'India', image: inImage },
+        { country: 'Ilaty', image: itImage },
+        //////
+        { country: 'Japan', image: jpImage },
+        { country: 'China', image: cnImage },
+        { country: 'Russia', image: ruImage },
+        { country: 'Malaysia', image: myImage },
+    ]);
+    const [currentFlagIndex, setCurrentFlagIndex] = useState(0);
+    const [options, setOptions] = useState([]);
+    const [correctGuesses, setCorrectGuesses] = useState(0);
+    const [score, setScore] = useState(0);
+
+    useEffect(() => {
+        const selectRandomFlag = () => {
+            const selectedFlag = flags[currentFlagIndex];
+            if (!selectedFlag) return;
+
+            const correctOption = selectedFlag.country;
+            const incorrectOptions = flags
+                .filter((flag) => flag.country !== correctOption)
+                .map((flag) => flag.country)
+                .sort(() => Math.random() - 0.5)
+                .slice(0, 3);
+            const allOptions = [...incorrectOptions, correctOption].sort(() => Math.random() - 0.5);
+            setOptions(allOptions);
+        };
+
+        if (currentFlagIndex < flags.length) {
+            selectRandomFlag();
+        } else {
+            console.log('Game over!');
+        }
+    }, [flags, currentFlagIndex]);
+
+    const handleOptionClick = (selectedOption) => {
+        if (selectedOption === flags[currentFlagIndex]?.country) {
+            console.log('Correct answer!');
+            setCorrectGuesses((prevCount) => prevCount + 1);
+            setScore((prevScore) => prevScore + 1);
+        } else {
+            console.log('Incorrect answer!');
+        }
+    };
+
+    const handleNextClick = () => {
+        setCurrentFlagIndex((prevIndex) => prevIndex + 1);
+    };
+
+    return (
+        <div className="card">
+            <p className="nameflag">Name That Flag!</p>
+            <div className="img-container">
+                {flags[currentFlagIndex] && <img src={flags[currentFlagIndex].image} alt={flags[currentFlagIndex].country} />}
+            </div>
+            <div className="grid-container">
+                {options.map((option, index) => (
+                    <div key={index} className="grid-item" onClick={() => handleOptionClick(option)}>
+                        {option}
+                    </div>
+                ))}
+            </div>
+            <button className="nextbtn" onClick={handleNextClick}>
+                Next
+            </button>
+        </div>
+    );
+}
+
+export default GuessCard;
+///////////////////////////////
+///////////////////////////////
+////////////////////////    updated
+//////////////////////////
+///////////////////////////////////
+// InitialFlagContainer.jsx
+import React from 'react';
+import './InitialFlagContainer.css';
+
+function InitialFlagContainer({ onStartClick }) {
+    return (
+        <>
+            <div className="card">
+                <div className="img-container">
+                    <img src="\src\components\pk.png" alt="Pakistan Flag" />
+                </div>
+                <div className="outer-container">
+                    <p className="Theh1">Guess The Flag</p>
+                    <button className="startbtn" onClick={onStartClick}>Start</button> {/* Call onStartClick when button clicked */}
+                    <p className="p-text">20 Questions</p>
+                </div>
+            </div>
+        </>
+    );
+}
+
+export default InitialFlagContainer;
+//////////////////////////////////////////
+// App.jsx
+import React, { useState } from 'react';
+import './App.css';
+import GuessCard from './components/GuessCard.jsx';
+import InitialFlagContainer from './components/InitialFlagContainer.jsx';
+
+function App() {
+    const [gameStarted, setGameStarted] = useState(false); // State variable to track game start
+
+    // Function to handle start button click
+    const handleStartClick = () => {
+        setGameStarted(true); // Update gameStarted state to true
+    };
+
+    return (
+        <div>
+            {!gameStarted && <InitialFlagContainer onStartClick={handleStartClick} />} {/* Render InitialFlagContainer if game not started */}
+            {gameStarted && <GuessCard />} {/* Render GuessCard if game started */}
+        </div>
+    );
+}
+
+export default App;
+/////////////////////////////////////
+/////////////////////////////////////
+////////////////////////////////
+///////////////////////////////////////
+import React, { useState } from 'react';
+import './App.css'; // Import styles
+import GuessCard from './components/GuessCard.jsx';
+import InitialFlagContainer from './components/InitialFlagContainer.jsx';
+import Finish from './components/FinishCard.jsx'; // Import the Finish component
+
+function App() {
+    const [isGameFinished, setIsGameFinished] = useState(false);
+
+    // Function to handle game finish
+    const handleGameFinish = () => {
+        setIsGameFinished(true);
+    };
+
+    return (
+        <div>
+            {!isGameFinished && <InitialFlagContainer />}
+            {!isGameFinished && <GuessCard onGameFinish={handleGameFinish} />}{' '}
+            {/* Pass the handleGameFinish function as a prop */}
+            {isGameFinished && <Finish />} {/* Render the Finish component when the game is finished */}
+        </div>
+    );
+}
+
+export default App;

@@ -1,0 +1,107 @@
+.body{
+    margin: 0;
+    padding: 0;
+    
+
+}
+.cardd {
+    margin-top: 3%;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(208, 208, 208);
+    box-sizing: border-box;
+    margin-left: 6%;
+    margin-right: 6%;
+    /* height: 780px; */
+}
+.img-container{
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80% !important;
+    height: 80% !important;
+    overflow: hidden; /* Ensure the image doesn't overflow the container */
+}
+
+.img-container img {
+    width: 80% !important;
+    height: 80% !important;
+    object-fit: cover; /* Ensure the image covers the entire container */
+}
+
+
+.nameflag {
+    float: left;
+    border-radius: 15px;
+    background-color: rgb(198, 198, 198);
+    width: 100%;
+    padding: 15px;
+    font-weight: 16px;
+    font-weight: bolder;
+    margin-top: -3%;
+}
+.nextbtn {
+    margin-top: 3%;
+    padding: 12px;
+    font-weight: bolder;
+    color: white;
+    background-color: rgba(9, 137, 211, 0.8);
+    border-radius: 6px;
+    background-color: rgba(9, 137, 211, 0.8);
+    font-size: 22px;
+}
+.nextbtn:hover {
+    background-color: rgba(13, 151, 232, 0.8);
+    outline: none;
+}
+.nextbtn:focus {
+    outline: none;
+}
+
+
+.grid-container {
+    padding-top: 2%;
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Two columns with equal width */
+    grid-template-rows: 1fr 1fr; /* Two rows with equal height */
+    gap: 25px; /* Gap between grid items */
+}
+
+.grid-item {
+    background-color: grey;
+    padding: 20px;
+    font-size: 18px;
+    font-weight: bolder;
+    color: white;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.grid-item:hover {
+    cursor: pointer;
+    background-color: rgb(139, 139, 139);
+}
+.correct {
+    background-color: green;
+}
+
+.incorrect {
+    background-color: red;
+}
+
+@media screen and (max-width: 600px) {
+    .grid-container {
+        grid-template-columns: 1fr; /* One column layout for smaller screens */
+    }
+}
+
+@media screen and (max-width: 300px) {
+    .grid-container {
+        overflow: auto; /* Add scrollbar if content exceeds container size */
+    }
+}
+
