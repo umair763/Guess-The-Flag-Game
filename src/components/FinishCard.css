@@ -9,7 +9,8 @@
     box-sizing: border-box;
     margin-left: 6%;
     margin-right: 6%;
-}
+    /* height: 100vh; */
+} 
  
 .img-container{
     border-radius: 10px;
@@ -79,4 +80,18 @@
 }
 .play-again-btn:focus {
     outline: none;
+}
+
+
+@media screen and (min-width: 1024px) and (max-width: 1366px) {
+    /* Component 1 adjustments */
+    .outer-container {
+        width: 75% ; /* Adjusted width for Component 1 */
+    }
+
+    /* Component 2 adjustments */
+    .img-container, .img-container img {
+        width: 65% !important; /* Adjusted width for Component 2 */
+    }
+
 }
