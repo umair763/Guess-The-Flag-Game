@@ -1,0 +1,109 @@
+import React, { useState, useEffect } from 'react';
+import './GuessCard.css';
+
+// Import flag images
+import pkImage from './flag-images/country-flags-main/png1000px/pk.png';
+import phImage from './flag-images/country-flags-main/png1000px/ph.png';
+import psImage from './flag-images/country-flags-main/png1000px/ps.png';
+import nzImage from './flag-images/country-flags-main/png1000px/nz.png';
+import esImage from './flag-images/country-flags-main/png1000px/es.png';
+import gbImage from './flag-images/country-flags-main/png1000px/gb.png';
+import inImage from './flag-images/country-flags-main/png1000px/in.png';
+import itImage from './flag-images/country-flags-main/png1000px/it.png';
+
+function GuessCard({ onGameFinish, selectedContinent }) {
+    console.log(`selected continet should be : ${selectedContinent}`);
+
+    const [flags, setFlags] = useState([]);
+    const [currentFlagIndex, setCurrentFlagIndex] = useState(0);
+    const [options, setOptions] = useState([]);
+    const [correctGuesses, setCorrectGuesses] = useState(0);
+    const [totalScore, setTotalScore] = useState(0);
+
+    useEffect(() => {
+        const getFlagsByContinent = () => {
+            switch (selectedContinent) {
+                case 'Asia':
+                    return [
+                        { country: 'Pakistan', image: pkImage },
+                        { country: 'Philippines', image: phImage },
+                        { country: 'Palestine', image: psImage },
+                        { country: 'New Zealand', image: nzImage },
+                    ];
+                case 'Europe':
+                    return [
+                        { country: 'Spain', image: esImage },
+                        { country: 'Britain', image: gbImage },
+                        { country: 'India', image: inImage },
+                        { country: 'Italy', image: itImage },
+                    ];
+                default:
+                    return [];
+            }
+        };
+
+        setFlags(getFlagsByContinent(selectedContinent));
+    }, [selectedContinent]);
+
+    useEffect(() => {
+        const selectRandomFlag = () => {
+            const selectedFlag = flags[currentFlagIndex];
+            if (!selectedFlag) return;
+
+            const correctOption = selectedFlag.country;
+            const incorrectOptions = flags
+                .filter((flag) => flag.country !== correctOption)
+                .map((flag) => flag.country)
+                .sort(() => Math.random() - 0.5)
+                .slice(0, 3);
+            const allOptions = [...incorrectOptions, correctOption].sort(() => Math.random() - 0.5);
+            setOptions(allOptions);
+        };
+
+        selectRandomFlag();
+    }, [flags, currentFlagIndex]);
+
+    const handleOptionClick = (selectedOption) => {
+        const isCorrect = selectedOption === flags[currentFlagIndex]?.country;
+
+        if (isCorrect) {
+            console.log('Correct answer!');
+            setCorrectGuesses((prevCount) => prevCount + 1);
+            setTotalScore((prevScore) => prevScore + 1);
+        } else {
+            console.log('Incorrect answer!');
+        }
+
+        if (currentFlagIndex < flags.length - 1) {
+            setCurrentFlagIndex((prevIndex) => prevIndex + 1);
+        } else {
+            onGameFinish(totalScore, correctGuesses);
+        }
+    };
+
+    return (
+        <div className="cardd">
+            <p className="nameflag">Name That Flag!</p>
+            <div className="container">
+                {console.log('Flags:', flags)}
+                {flags[currentFlagIndex] && <img src={flags[currentFlagIndex].image} alt={flags[currentFlagIndex].country} />}
+            </div>
+            <div className="grid-container">
+                {console.log('Options:', options)}
+                {options.map((option, index) => (
+                    <div key={index} className="grid-item" onClick={() => handleOptionClick(option)}>
+                        {option}
+                    </div>
+                ))}
+            </div>
+            {console.log('Current Flag Index:', currentFlagIndex)}
+            {currentFlagIndex < flags.length - 1 && (
+                <button className="nextbtn" onClick={() => setCurrentFlagIndex((prevIndex) => prevIndex + 1)}>
+                    Next
+                </button>
+            )}
+        </div>
+    );
+}
+
+export default GuessCard;

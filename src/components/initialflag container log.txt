@@ -1,0 +1,115 @@
+.body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Center content vertically */
+    height: 100vh; /* Ensure full screen height */
+    background-color: rgba(0, 0, 0, 0.5); /* Low opacity background */
+}
+.img-container {
+    position: relative; /* Change position to relative */
+    width: 100%; /* Set width to 100% */
+    height: 100%; /* Set height to 100% */
+    overflow: hidden; /* Ensure the image doesn't overflow the container */
+}
+
+.card {
+    position: relative; /* Ensure relative positioning for child elements */
+}
+
+.outer-container {
+    position: absolute; /* Adjust position to allow for stacking */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(255, 255, 255, 0.8); /* Adjust opacity */
+    border-radius: 6px;
+    padding: 10px;
+    z-index: 1;
+    text-align: center;
+    width: 50%; /* Adjust width as needed */
+    max-width: 90%; /* Ensure it doesn't exceed 90% of viewport width */
+}
+
+
+.img-container img {
+    width: 100% ;
+    height: 100%;
+    object-fit: contain !important;
+}
+
+.startbtn {
+    padding: 12px;
+    font-weight: bolder;
+    color: white;
+    width: 100%;
+    background-color: rgba(9, 211, 69, 0.748);
+    border-radius: 6px;
+    border-color: rgba(9, 211, 69, 0.748);
+    font-size: 22px;
+}
+.startbtn:hover {
+    background-color: rgba(10, 232, 77, 0.748);
+    outline: none;
+}
+.startbtn:focus {
+    outline: none;
+}
+
+.p-text {
+    margin-top: 5%;
+    margin-bottom: 0;
+    float: left;
+}
+
+@media (max-width: 750px) {
+    .outer-container {
+        width: 89%; /* Adjust width for smaller screens */
+    }
+}
+
+@media (max-width: 510px) {
+    .outer-container {
+        width: 89%; /* Adjust width for smaller screens */
+        height: 90%;
+    }
+}
+
+@media screen and (min-width: 1024px) and (max-width: 1366px) {
+    /* Component 1 adjustments */
+    .outer-container {
+        width: 75%; /* Adjusted width for Component 1 */
+    }
+
+    .card {
+        height: 90vh;
+    }
+
+    /* Component 2 adjustments */
+    .img-container,
+    .img-container img {
+        width: 65% !important; /* Adjusted width for Component 2 */
+    }
+}
+////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////
+///////////////////////////////////////////////////////
+return (
+        <div className="cardd">
+            <p className="nameflag">Name That Flag!</p>
+            <div className="img-container">
+                {flags[currentFlagIndex] && <img src={flags[currentFlagIndex].image} alt={flags[currentFlagIndex].country} />}
+            </div>
+            <div className="grid-container">
+                {options.map((option, index) => (
+                    <div key={index} className="grid-item" onClick={() => handleOptionClick(option)}>
+                        {option}
+                    </div>
+                ))}
+            </div>
+            <button className="nextbtn" onClick={handleNextClick}>
+                Next
+            </button>
+        </div>
+    );

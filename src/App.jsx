@@ -9,15 +9,16 @@ function App() {
     const [isGameFinished, setIsGameFinished] = useState(false);
     const [totalScore, setTotalScore] = useState(0);
     const [correctGuesses, setCorrectGuesses] = useState(0);
+    const [selectedContinent, setSelectedContinent] = useState('');
 
-    const handleStartClick = () => {
+    const handleStartClick = (continent) => {
         setGameStarted(true);
+        setSelectedContinent(continent);
     };
 
     const handleGameFinish = (score, correctGuesses) => {
         setIsGameFinished(true);
-        // setTotalScore(score);
-        setTotalScore(16);
+        setTotalScore(score);
         setCorrectGuesses(correctGuesses);
     };
 
@@ -31,7 +32,9 @@ function App() {
     return (
         <div>
             {!gameStarted && <InitialFlagContainer onStartClick={handleStartClick} />}
-            {gameStarted && !isGameFinished && <GuessCard onGameFinish={handleGameFinish} />}
+            {gameStarted && !isGameFinished && (
+                <GuessCard onGameFinish={handleGameFinish} selectedContinent={selectedContinent} />
+            )}
             {isGameFinished && (
                 <FinishCard totalScore={totalScore} correctGuesses={correctGuesses} onRestartClick={handleRestartClick} />
             )}

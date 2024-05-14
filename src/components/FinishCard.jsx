@@ -26,5 +26,5 @@ function FinishCard({ onRestartClick, totalScore, correctGuesses }) {
         </div>
     );
 }
-
+ 
 export default FinishCard;
