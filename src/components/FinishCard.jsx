@@ -1,7 +1,7 @@
 import React from 'react';
 import './FinishCard.css';
 
-function FinishCard({ onRestartClick, totalScore, correctGuesses }) {
+function FinishCard({ onRestartClick, totalScore, attemptedScore, obtainedScore, incorrectGuesses }) {
     const handleRestartClick = () => {
         onRestartClick(); // Call the callback function passed from App.jsx to restart the game
     };
@@ -11,13 +11,26 @@ function FinishCard({ onRestartClick, totalScore, correctGuesses }) {
             <div className="inner-card">
                 <h2 className="card-title">Score Card</h2>
                 <div className="score-details">
-                    <p>
-                        Total Score: <span>{totalScore}</span>
-                    </p>
-                    <p>
-                        Obtained Score: <span>{correctGuesses}</span>
-                    </p>
-                    {/* Additional score details if needed */}
+                    <div className="table-container">
+                        <table className="table">
+                            <tr>
+                                <th>Total Score</th>
+                                <td>{totalScore}</td>
+                            </tr>
+                            <tr>
+                                <th>Attempted Questions</th>
+                                <td>{attemptedScore}</td>
+                            </tr>
+                            <tr>
+                                <th>Correct Guesses</th>
+                                <td>{obtainedScore}</td>
+                            </tr>
+                            <tr>
+                                <th>Incorrect Guesses</th>
+                                <td>{incorrectGuesses}</td>
+                            </tr>
+                        </table>
+                    </div>
                 </div>
                 <button className="play-again-btn" onClick={handleRestartClick}>
                     Play Again
@@ -26,5 +39,5 @@ function FinishCard({ onRestartClick, totalScore, correctGuesses }) {
         </div>
     );
 }
- 
+
 export default FinishCard;

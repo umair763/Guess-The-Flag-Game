@@ -15,7 +15,7 @@ function InitialFlagContainer({ onStartClick }) {
     };
 
     return (
-        <div className="card">
+        <div className="body card" >
             <div className="bgimg">
                 <img src="\src\components\World countries flags stock illustration.jpeg" alt="background-img" />
             </div>
@@ -83,7 +83,7 @@ function InitialFlagContainer({ onStartClick }) {
                 <button className="startbtn" onClick={handleStartClick}>
                     Start
                 </button>
-                <p className='question-text'>20 Questions Each Continent</p>
+                {/* <p className='question-text'>20 Questions Each Continent</p> */}
             </div>
         </div>
     );

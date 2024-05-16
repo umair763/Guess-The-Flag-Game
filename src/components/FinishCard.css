@@ -10,9 +10,20 @@
     margin-left: 6%;
     margin-right: 6%;
     /* height: 100vh; */
-} 
- 
-.img-container{
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.119);
+}
+
+@font-face {
+    font-family: 'Caros Light';
+    src: url('https://db.onlinewebfonts.com/t/9180dec2cdd1711edd6b8d86954aae05.eot');
+    src: url('https://db.onlinewebfonts.com/t/9180dec2cdd1711edd6b8d86954aae05.eot?#iefix') format('embedded-opentype'),
+        url('https://db.onlinewebfonts.com/t/9180dec2cdd1711edd6b8d86954aae05.woff2') format('woff2'),
+        url('https://db.onlinewebfonts.com/t/9180dec2cdd1711edd6b8d86954aae05.woff') format('woff'),
+        url('https://db.onlinewebfonts.com/t/9180dec2cdd1711edd6b8d86954aae05.ttf') format('truetype'),
+        url('https://db.onlinewebfonts.com/t/9180dec2cdd1711edd6b8d86954aae05.svg#Caros Light') format('svg');
+}
+
+.img-container {
     border-radius: 10px;
     display: flex;
     justify-content: center;
@@ -40,6 +51,7 @@
     width: 80%;
     line-height: 30px;
     background-color: #f0f0f0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.149);
     border-radius: 10px;
     padding: 20px;
     justify-content: center;
@@ -49,19 +61,23 @@
 
 .card-title {
     margin-top: 0;
+    font-family: 'Caros Light', sans-serif;
+    font-weight: bolder;
 }
 
 .score-details {
     text-align: left;
-    margin-bottom: 20px;
+    margin-bottom: 18px;
 }
 
 .score-details p {
     margin: 5px 0;
+    font-family: 'Caros Light', sans-serif;
 }
 
 .score-details span {
     font-weight: bold;
+    font-family: 'Caros Light', sans-serif;
 }
 
 .play-again-btn {
@@ -72,6 +88,7 @@
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    font-family: 'Caros Light', sans-serif;
 }
 
 .play-again-btn:hover {
@@ -82,16 +99,186 @@
     outline: none;
 }
 
-
 @media screen and (min-width: 1024px) and (max-width: 1366px) {
     /* Component 1 adjustments */
     .outer-container {
-        width: 75% ; /* Adjusted width for Component 1 */
+        width: 75%; /* Adjusted width for Component 1 */
     }
 
     /* Component 2 adjustments */
-    .img-container, .img-container img {
+    .img-container,
+    .img-container img {
         width: 65% !important; /* Adjusted width for Component 2 */
     }
-
 }
+/* //////////note::table properties////////////////// */
+
+.table-container {
+    width: auto;
+    margin: 0 auto;
+}
+
+.table {
+    border-collapse: collapse;
+    width: 100%;
+    border: 2px solid #f0f0f0;
+    border-radius: 8px;
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+}
+
+.table th,
+.table td {
+    padding: 10px;
+    padding-left: 5%;
+    border-bottom: 8px solid #f0f0f0;
+    font-family: 'Caros Light', sans-serif;
+}
+
+.table th {
+    font-weight: 500;
+    background-color: #1b83acda;
+    color: #fff;
+}
+.table td {
+    font-weight: 600;
+    background-color: #0ead9f;
+    color: #fff;
+}
+/* ///////////// */
+@media screen and (min-width: 280px) and (max-width: 400px) {
+    /* Component 1 adjustments */
+    .card-title {
+        font-size: 12px;
+    }
+    .inner-card {
+        height: 110% !important;
+        width: 75% !important;
+    }
+    .score-details {
+        margin-bottom: -10px !important;
+    }
+
+    .table th,
+    .table td {
+        padding: 2px !important;
+        font-size: 8px;
+        border-bottom: 8px solid #f0f0f0;
+        line-height: 12px;
+    }
+
+    .outer-container {
+        width: 75%;
+    }
+
+    .play-again-btn {
+        padding: 3px !important;
+        font-size: 8px;
+    }
+
+    /* Component 2 adjustments */
+    .img-container,
+    .img-container img {
+        width: 65% !important;
+    }
+}
+/* /////////////// */
+@media screen and (min-width: 400px) and (max-width: 550px) {
+    /* Component 1 adjustments */
+    .card-title {
+        font-size: 16px;
+    }
+    .inner-card {
+        height: 84% !important;
+        width: 75% !important;
+    }
+    .score-details {
+        margin-bottom: 0 !important;
+    }
+
+    .table th,
+    .table td {
+        padding: 4px !important;
+        font-size: 9px;
+        border-bottom: 8px solid #f0f0f0;
+        line-height: 14px;
+    }
+
+    .outer-container {
+        width: 75%;
+    }
+
+    .play-again-btn {
+        padding: 3px !important;
+        font-size: 8px;
+    }
+
+    /* Component 2 adjustments */
+    .img-container,
+    .img-container img {
+        width: 65% !important;
+    }
+}
+/* /////////////// */
+@media screen and (min-width: 550px) and (max-width: 800px) {
+    /* Component 1 adjustments */
+    .card-title {
+        font-size: 20px;
+    }
+    .inner-card {
+        height: 90% !important;
+        width: 75% !important;
+    }
+    .score-details {
+        margin-bottom: 2px !important;
+    }
+
+    .table th,
+    .table td {
+        padding: 6px !important;
+        font-size: 12px;
+        border-bottom: 8px solid #f0f0f0;
+        line-height: 14px;
+    }
+
+    .outer-container {
+        width: 75%;
+    }
+
+    .play-again-btn {
+        padding: 5px !important;
+        font-size: 10px;
+    }
+
+    /* Component 2 adjustments */
+    .img-container,
+    .img-container img {
+        width: 65% !important;
+    }
+}
+/* /////////////// */
+@media screen and (min-width: 800px) and (max-width: 940px) {
+    /* Component 1 adjustments */
+
+    .inner-card {
+        height: 100%;
+        width: 70%;
+    }
+
+    .table th,
+    .table td {
+        padding: 5px;
+    }
+
+    .outer-container {
+        width: 75%;
+    }
+
+    /* Component 2 adjustments */
+    .img-container,
+    .img-container img {
+        width: 65% !important;
+    }
+}
+/* ///////////// */
+
+/* ///////////// */

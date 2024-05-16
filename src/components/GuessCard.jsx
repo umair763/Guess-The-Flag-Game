@@ -136,6 +136,8 @@ function GuessCard({ onGameFinish, selectedContinent }) {
     const [currentFlagIndex, setCurrentFlagIndex] = useState(0);
     const [options, setOptions] = useState([]);
     const [correctGuesses, setCorrectGuesses] = useState(0);
+    const [attemptedScore, setAttemptedScore] = useState(0);
+    const [incorrectGuesses, setIncorrectGuesses] = useState(0);
     const [totalScore, setTotalScore] = useState(0);
 
     // Shuffle function
@@ -296,49 +298,8 @@ function GuessCard({ onGameFinish, selectedContinent }) {
         // Shuffle the flags array before setting it in the state
         const shuffledFlags = shuffle(getFlagsByContinent(selectedContinent));
         setFlags(shuffledFlags);
+        setTotalScore(shuffledFlags.length); // Set total score based on the number of flags
     }, [selectedContinent]);
-
-    useEffect(() => {
-        if (flags.length > 0) {
-            const selectedFlag = flags[currentFlagIndex];
-            const correctOption = selectedFlag.country;
-            const incorrectOptions = flags.filter((flag) => flag.country !== correctOption).map((flag) => flag.country);
-            const allOptions = [...incorrectOptions, correctOption].sort(() => Math.random() - 0.5);
-            setOptions(allOptions);
-        }
-    }, [flags, currentFlagIndex]);
-
-    const handleOptionClick = (selectedOption) => {
-        const isCorrect = selectedOption === flags[currentFlagIndex]?.country;
-        const selectedOptionElement = document.querySelector(`.grid-item[data-option="${selectedOption}"]`);
-
-        if (isCorrect) {
-            console.log('Correct answer!');
-            setCorrectGuesses((prevCount) => prevCount + 1);
-            setTotalScore((prevScore) => prevScore + 1);
-        } else {
-            console.log('Incorrect answer!');
-        }
-
-        // Update the CSS class of the selected option
-        const updatedOptions = options.map((option) => {
-            if (option === selectedOption) {
-                return isCorrect ? 'correct' : 'incorrect';
-            } else {
-                return '';
-            }
-        });
-
-        setOptions(updatedOptions);
-    };
-
-    const handleNextClick = () => {
-        if (currentFlagIndex < flags.length - 1) {
-            setCurrentFlagIndex((prevIndex) => prevIndex + 1);
-        } else {
-            onGameFinish(totalScore, correctGuesses);
-        }
-    };
 
     useEffect(() => {
         if (flags.length > 0) {
@@ -358,15 +319,64 @@ function GuessCard({ onGameFinish, selectedContinent }) {
         }
     }, [flags, currentFlagIndex]);
 
+    const handleOptionClick = (selectedOption) => {
+        const isCorrect = selectedOption === flags[currentFlagIndex]?.country;
+        setAttemptedScore((prevScore) => prevScore + 1); // Increment attempted score
+
+        // Remove existing coloring classes from all options
+        const optionElements = document.querySelectorAll('.grid-item');
+        optionElements.forEach((element) => {
+            element.classList.remove('correct', 'incorrect');
+        });
+
+        // Add coloring class to the selected option
+        const selectedOptionElement = document.querySelector(`[data-option="${selectedOption}"]`);
+        if (selectedOptionElement) {
+            selectedOptionElement.classList.add(isCorrect ? 'correct' : 'incorrect');
+        }
+
+        // Update score counters
+        if (isCorrect) {
+            console.log('Correct answer!');
+            setCorrectGuesses((prevCount) => prevCount + 1);
+        } else {
+            console.log('Incorrect answer!');
+            setIncorrectGuesses((prevCount) => prevCount + 1);
+        }
+    };
+
+    // Sample render function for options
+    const renderOptions = (options) => {
+        return options.map((option, index) => (
+            <div key={index} data-option={option} className="grid-item" onClick={() => handleOptionClick(option)}>
+                {option}
+            </div>
+        ));
+    };
+
+
+    const handleNextClick = () => {
+        if (currentFlagIndex < flags.length - 1) {
+            setCurrentFlagIndex((prevIndex) => prevIndex + 1);
+        } else {
+            onGameFinish(totalScore, attemptedScore, correctGuesses, incorrectGuesses);
+        }
+    };
+
     return (
         <div className="cardd">
-            <p className="nameflag">Name That Flag!</p>
+            <h5 className="nameflag">Name That Flag!</h5>
             <div className="container">
                 {flags[currentFlagIndex] && <img src={flags[currentFlagIndex].image} alt={flags[currentFlagIndex].country} />}
             </div>
             <div className="grid-container">
                 {options.map((option, index) => (
-                    <div key={index} className="grid-item" onClick={() => handleOptionClick(option)}>
+                    <div
+                        key={index}
+                        className={`grid-item ${option}`}
+                        data-option={option}
+                        onClick={() => handleOptionClick(option)}
+                    >
                         {option}
                     </div>
                 ))}
