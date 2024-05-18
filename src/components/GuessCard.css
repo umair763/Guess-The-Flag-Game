@@ -24,25 +24,15 @@
     display: flex;
     width: 55%;
     /* height: 75%; */
-    overflow: hidden; /* Ensure the image doesn't overflow the container */
+    overflow: hidden; 
 }
 
 .container img {
     width: 75%;
     height: 100%;
-    object-fit: cover; /* Ensure the image covers the entire container */
+    object-fit: cover; 
 }
 
-/* .nameflag {
-    float: left;
-    border-radius: 15px;
-    background-color: rgb(198, 198, 198);
-    padding: 15px;
-    font-weight: 16px;
-    font-weight: bolder;
-    position: relative;
-    width: 100%;
-} */
 @font-face {
     font-family: 'Caros Light';
     src: url('https://db.onlinewebfonts.com/t/9180dec2cdd1711edd6b8d86954aae05.eot');
@@ -67,7 +57,7 @@
     padding: 15px;
     font-weight: 16px;
     font-weight: bolder;
-    font-family: 'Caros Light', sans-serif; /* Apply the custom font to specific elements */
+    font-family: 'Caros Light', sans-serif; /
 }
 .nextbtn {
     margin-top: 3%;
@@ -78,7 +68,7 @@
     background-color: rgba(9, 137, 211, 0.8);
     font-size: 20px;
     width: 12%;
-    font-family: 'Caros Light', sans-serif; /* Apply the custom font to specific elements */
+    font-family: 'Caros Light', sans-serif; 
 }
 .nextbtn:hover {
     background-color: rgba(13, 151, 232, 0.8);
@@ -91,9 +81,9 @@
 .grid-container {
     padding-top: 2%;
     display: grid;
-    grid-template-columns: 1fr 1fr; /* Two columns with equal width */
-    grid-template-rows: 1fr 1fr; /* Two rows with equal height */
-    gap: 25px; /* Gap between grid items */
+    grid-template-columns: 1fr 1fr; 
+    grid-template-rows: 1fr 1fr; 
+    gap: 25px; 
 }
 
 .grid-item {
@@ -109,7 +99,7 @@
 
 .grid-item:hover {
     cursor: pointer;
-    /* background-color: rgb(139, 139, 139); */
+   
 }
 /* //////// */
 .correct {
@@ -119,40 +109,32 @@
 .incorrect {
     background-color: red;
 }
-/* Selected option styles */
+
 .grid-item.selected {
     background-color: green; 
 }
 
-/* Hover effect for unselected options */
-/* .grid-item:not(.selected):hover {
-    background-color: grey; 
-} */
-
-/* Ensure the hover effect doesn't override the selected state */
 .grid-item:hover.selected {
-    background-color: inherit; /* Keeps the selected color */
+    background-color: inherit;
 }
 /* ////////////////////////// */
 @media screen and (max-width: 600px) {
     .grid-container {
-        grid-template-columns: 1fr; /* One column layout for smaller screens */
+        grid-template-columns: 1fr; 
     }
 }
 
 @media screen and (max-width: 300px) {
     .grid-container {
-        overflow: auto; /* Add scrollbar if content exceeds container size */
+        overflow: auto; 
     }
 }
 
 @media screen and (min-width: 1024px) and (max-width: 1366px) {
-    /* Component 1 adjustments */
     .outer-container {
         width: 80%;
     }
 
-    /* Component 2 adjustments */
     .container {
         width: 60%;
     }
