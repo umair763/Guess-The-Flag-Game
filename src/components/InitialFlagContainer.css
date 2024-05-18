@@ -39,13 +39,13 @@ body {
     align-items: center;
     width: 100%;
     height: 100%;
-    overflow: hidden; /* Ensure the image doesn't overflow the container */
+    overflow: hidden; 
 }
 
 .bgimg img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Ensure the image covers the entire container */
+    object-fit: cover;
 }
 
 /* ///////////////note:: startbox style///////////////////////// */
@@ -65,12 +65,12 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: rgba(255, 255, 255, 0.646); /* Adjust opacity */
+    background-color: rgba(255, 255, 255, 0.646); 
     border-radius: 6px;
     padding: 10px;
     z-index: 1;
     text-align: center;
-    width: 40% !important; /* Adjust width as needed */
+    width: 40% !important; 
 }
 /* ////////////////note:: radio btn options//////////////////// */
 .select-text {
@@ -81,10 +81,9 @@ body {
     font-family: 'Caros Light', sans-serif;
 }
 
-/* Additional styling to make the text more appealing */
 .select-text::before {
-    content: '🌍'; /* Add an emoji before the text */
-    margin-right: 10px; /* Add spacing between emoji and text */
+    content: '🌍';
+    margin-right: 10px; 
 }
 
 .container {
@@ -96,7 +95,7 @@ body {
 .option-container {
     display: flex;
     flex-direction: column;
-    align-items: flex-start; /* Align items to the left */
+    align-items: flex-start; 
     padding: 8px;
     padding-left: 36px;
     padding-right: 36px;
@@ -111,7 +110,7 @@ body {
 }
 
 .option-container label {
-    display: flex; /* Use flexbox for label and radio button */
+    display: flex; 
     align-items: center;
     margin: 6px 0;
     cursor: pointer;
@@ -120,7 +119,7 @@ body {
 }
 
 .option-container label:hover {
-    color: #007bff; /* Change color on hover */
+    color: #007bff; 
 }
 
 .option-container input[type='radio'] + label:before {
@@ -134,7 +133,7 @@ body {
 }
 
 .option-container input[type='radio']:checked + label:before {
-    background-color: #007bff; /* Change background color when checked */
+    background-color: #007bff;
 }
 
 /* ////////////////note:: radio btn options//////////////////// */
@@ -156,12 +155,6 @@ body {
 .startbtn:focus {
     outline: none;
 }
-
-/* .p-text {
-    margin-top: 5px;
-    margin-bottom: 0;
-    float: left;
-} */
 
 .question-text {
     margin-top: 2px;
@@ -197,7 +190,7 @@ body {
         font-size: 10px !important;
     }
     .outer-container {
-        width: 65% !important; /* Adjust width as needed */
+        width: 65% !important; 
         height: 80% !important;
     }
     .startbtn {
@@ -251,7 +244,7 @@ body {
         font-size: 16px !important;
     }
     .outer-container {
-        width: 55% !important; /* Adjust width as needed */
+        width: 55% !important; 
         height: 70% !important;
     }
     .startbtn {
@@ -301,7 +294,7 @@ body {
         font-size: 18px !important;
     }
     .outer-container {
-        width: 55% !important; /* Adjust width as needed */
+        width: 55% !important; 
         height: 77% !important;
     }
     .startbtn {
@@ -354,7 +347,7 @@ body {
         font-size: 18px !important;
     }
     .outer-container {
-        width: 45% !important; /* Adjust width as needed */
+        width: 45% !important; 
         height: 75% !important;
     }
     .startbtn {
@@ -417,13 +410,12 @@ body {
     }
 
     .outer-container {
-        width: 50% !important; /* Adjust width as needed */
+        width: 50% !important;
     }
     .bgimg {
         width: 100%;
     }
     .bgimg img {
-        /* width: 100%;  */
         object-fit: contain;
     }
     .question-text {
