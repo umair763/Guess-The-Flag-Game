@@ -77,7 +77,7 @@ function InitialFlagContainer({ onStartClick }) {
                             onChange={() => setSelectedContinent('Australia')}
                         />
                         <label for="australia">Australia</label>
-                        {/* Add other continent options similarly */}
+                       
                     </div>
                 </div>
                 <button className="startbtn" onClick={handleStartClick}>
