@@ -3,16 +3,16 @@ import "./GuessCard.css";
 
 // Import flag images
 ////////////note:: Africa
-import ngImage from "./flag-images/country-flags-main/png1000px/ng.png";
-import etImage from "./flag-images/country-flags-main/png1000px/et.png";
-import egImage from "./flag-images/country-flags-main/png1000px/eg.png";
-import cdImage from "./flag-images/country-flags-main/png1000px/cd.png";
-import tzImage from "./flag-images/country-flags-main/png1000px/tz.png";
-import keImage from "./flag-images/country-flags-main/png1000px/ke.png";
-import zaImage from "./flag-images/country-flags-main/png1000px/za.png";
-import ugImage from "./flag-images/country-flags-main/png1000px/ug.png";
-import dzImage from "./flag-images/country-flags-main/png1000px/dz.png";
-import sdImage from "./flag-images/country-flags-main/png1000px/sd.png";
+import ngImage from "./flag-images/country-flags-main/png1000px/ng.png"; // Nigeria
+import etImage from "./flag-images/country-flags-main/png1000px/et.png"; // Ethiopia
+import egImage from "./flag-images/country-flags-main/png1000px/eg.png"; // Egypt
+import cdImage from "./flag-images/country-flags-main/png1000px/cd.png"; // Democratic Republic of the Congo
+import tzImage from "./flag-images/country-flags-main/png1000px/tz.png"; // Tanzania
+import keImage from "./flag-images/country-flags-main/png1000px/ke.png"; // Kenya
+import zaImage from "./flag-images/country-flags-main/png1000px/za.png"; // South Africa
+import ugImage from "./flag-images/country-flags-main/png1000px/ug.png"; // Uganda
+import dzImage from "./flag-images/country-flags-main/png1000px/dz.png"; // Algeria
+import sdImage from "./flag-images/country-flags-main/png1000px/sd.png"; // Sudan
 import maImage from "./flag-images/country-flags-main/png1000px/ma.png"; // Morocco
 import aoImage from "./flag-images/country-flags-main/png1000px/ao.png"; // Angola
 import ghImage from "./flag-images/country-flags-main/png1000px/gh.png"; // Ghana
