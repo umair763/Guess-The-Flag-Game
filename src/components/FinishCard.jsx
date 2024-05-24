@@ -12,7 +12,7 @@ function FinishCard({ onRestartClick, totalScore, attemptedScore, obtainedScore,
                 <h2 className="card-title">Score Card</h2>
                 <div className="score-details">
                     <div className="table-container">
-                        <table className="table">
+                        <table className="table" >
                             <tr>
                                 <th>Total Score</th>
                                 <td>{totalScore}</td>

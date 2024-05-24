@@ -24,13 +24,13 @@
     display: flex;
     width: 55%;
     /* height: 75%; */
-    overflow: hidden; 
+    overflow: hidden;
 }
 
 .container img {
     width: 75%;
     height: 100%;
-    object-fit: cover; 
+    object-fit: cover;
 }
 
 @font-face {
@@ -57,8 +57,18 @@
     padding: 15px;
     font-weight: 16px;
     font-weight: bolder;
-    font-family: 'Caros Light', sans-serif; /
+    font-family: 'Caros Light', sans-serif;
 }
+
+.buttons-container {
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    /* background-color: green; */
+    justify-content: center !important;
+    align-items: center !important;
+}
+
 .nextbtn {
     margin-top: 3%;
     padding: 6px;
@@ -67,8 +77,8 @@
     border-radius: 6px;
     background-color: rgba(9, 137, 211, 0.8);
     font-size: 20px;
-    width: 12%;
-    font-family: 'Caros Light', sans-serif; 
+    width: 50%;
+    font-family: 'Caros Light', sans-serif;
 }
 .nextbtn:hover {
     background-color: rgba(13, 151, 232, 0.8);
@@ -77,20 +87,39 @@
 .nextbtn:focus {
     outline: none;
 }
+.Quitbtn {
+    margin-left: 15px;
+    margin-top: 3%;
+    padding: 6px;
+    font-weight: bolder;
+    color: white;
+    border-radius: 6px;
+    background-color: rgba(211, 9, 9, 0.8);
+    font-size: 20px;
+    width: 50%;
+    font-family: 'Caros Light', sans-serif;
+}
+.Quitbtn:hover {
+    background-color: rgba(244, 14, 14, 0.8);
+    outline: none;
+}
 
+.Quitbtn:focus {
+    outline: none;
+}
 .grid-container {
     padding-top: 2%;
     display: grid;
-    grid-template-columns: 1fr 1fr; 
-    grid-template-rows: 1fr 1fr; 
-    gap: 25px; 
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 25px;
 }
 
 .grid-item {
     background-color: grey;
     padding: 12px;
     font-size: 18px;
-    font-family: 'Caros Light', sans-serif; 
+    font-family: 'Caros Light', sans-serif;
     font-weight: bolder;
     color: white;
     border-radius: 10px;
@@ -99,7 +128,6 @@
 
 .grid-item:hover {
     cursor: pointer;
-   
 }
 /* //////// */
 .correct {
@@ -111,7 +139,7 @@
 }
 
 .grid-item.selected {
-    background-color: green; 
+    background-color: green;
 }
 
 .grid-item:hover.selected {
@@ -120,13 +148,13 @@
 /* ////////////////////////// */
 @media screen and (max-width: 600px) {
     .grid-container {
-        grid-template-columns: 1fr; 
+        grid-template-columns: 1fr;
     }
 }
 
 @media screen and (max-width: 300px) {
     .grid-container {
-        overflow: auto; 
+        overflow: auto;
     }
 }
 
