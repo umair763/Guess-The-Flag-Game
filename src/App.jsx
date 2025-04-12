@@ -1,9 +1,16 @@
-import React, { useState } from "react";
-import "./App.css";
-import GuessCard from "./components/GuessCard.jsx";
-import InitialFlagContainer from "./components/InitialFlagContainer.jsx";
-import FinishCard from "./components/FinishCard.jsx";
+"use client";
 
+import { useState, lazy, Suspense } from "react";
+import "./App.css";
+import { motion, AnimatePresence } from "framer-motion";
+import LoadingScreen from "./components/LoadingScreen";
+
+// Lazy load components for better performance
+const InitialFlagContainer = lazy(() => import("./components/InitialFlagContainer"));
+const GuessCard = lazy(() => import("./components/GuessCard"));
+const FinishCard = lazy(() => import("./components/FinishCard"));
+
+// Flag data organized by continent
 const flags = {
 	Africa: [
 		"Nigeria",
@@ -136,15 +143,20 @@ const flags = {
 function App() {
 	const [gameStarted, setGameStarted] = useState(false);
 	const [isGameFinished, setIsGameFinished] = useState(false);
-	const [totalScore, setTotalScore] = useState(0);
-	const [attemptedScore, setAttemptedScore] = useState(0);
-	const [correctGuesses, setCorrectGuesses] = useState(0);
-	const [incorrectGuesses, setIncorrectGuesses] = useState(0);
+	const [gameStats, setGameStats] = useState({
+		totalScore: 0,
+		attemptedScore: 0,
+		correctGuesses: 0,
+		incorrectGuesses: 0,
+		skippedFlags: 0,
+	});
 	const [selectedContinent, setSelectedContinent] = useState("");
+	const [flagCount, setFlagCount] = useState(10); // Default to 10 flags
 
-	const handleStartClick = (continent) => {
+	const handleStartClick = (continent, count) => {
 		setGameStarted(true);
 		setSelectedContinent(continent);
+		setFlagCount(count);
 	};
 
 	const continentMapping = {
@@ -156,21 +168,19 @@ function App() {
 		Australia: "Australia",
 	};
 
-	const handleGameFinish = (totalScore, attemptedScore, correctGuesses, incorrectGuesses) => {
+	const handleGameFinish = (stats) => {
 		// Use the mapping object to translate the plural continent name to camelCase
 		const continentKey = continentMapping[selectedContinent];
 
 		// Check if the translated key exists in the flags object
 		if (flags[continentKey]) {
-			// Calculate the totalScore based on the length of the array
-			const totalScore = flags[continentKey].length;
-
-			// Set the game as finished and update the scores
 			setIsGameFinished(true);
-			setTotalScore(totalScore);
-			setAttemptedScore(attemptedScore); // Reflect the current attempt count
-			setCorrectGuesses(correctGuesses); // Keep the current correct guesses count
-			setIncorrectGuesses(incorrectGuesses); // Keep the current incorrect guesses count
+			// Make sure the stats are correctly set
+			setGameStats({
+				...stats,
+				// Ensure attempted score is at least equal to correct + incorrect
+				attemptedScore: Math.max(stats.attemptedScore, stats.correctGuesses + stats.incorrectGuesses),
+			});
 		} else {
 			console.error(`No countries found for ${selectedContinent}`);
 		}
@@ -179,51 +189,61 @@ function App() {
 	const handleRestartClick = () => {
 		setGameStarted(false);
 		setIsGameFinished(false);
-		setTotalScore(0);
-		setAttemptedScore(0);
-		setCorrectGuesses(0);
-		setIncorrectGuesses(0);
-	};
-
-	const handleQuitGame = (totalScore, attemptedScore, correctGuesses, incorrectGuesses) => {
-		// Use the mapping object to translate the plural continent name to camelCase
-		const continentKey = continentMapping[selectedContinent];
-
-		// Check if the translated key exists in the flags object
-		if (flags[continentKey]) {
-			// Calculate the totalScore based on the length of the array
-			const totalScore = flags[continentKey].length;
-
-			// Set the game as finished and update the scores
-			setIsGameFinished(true);
-			setTotalScore(totalScore);
-			setAttemptedScore(attemptedScore); // Reflect the current attempt count
-			setCorrectGuesses(correctGuesses); // Keep the current correct guesses count
-			setIncorrectGuesses(incorrectGuesses); // Keep the current incorrect guesses count
-		} else {
-			console.error(`No countries found for ${selectedContinent}`);
-		}
+		setGameStats({
+			totalScore: 0,
+			attemptedScore: 0,
+			correctGuesses: 0,
+			incorrectGuesses: 0,
+			skippedFlags: 0,
+		});
 	};
 
 	return (
-		<div>
-			{!gameStarted && <InitialFlagContainer onStartClick={handleStartClick} />}
-			{gameStarted && !isGameFinished && (
-				<GuessCard
-					onGameFinish={handleGameFinish}
-					onQuitGame={handleQuitGame} // Pass the onQuitGame function as a prop
-					selectedContinent={selectedContinent}
-				/>
-			)}
-			{isGameFinished && (
-				<FinishCard
-					totalScore={totalScore}
-					attemptedScore={attemptedScore}
-					obtainedScore={correctGuesses} // Pass correctGuesses as obtainedScore
-					incorrectGuesses={incorrectGuesses}
-					onRestartClick={handleRestartClick}
-				/>
-			)}
+		<div className="app-container">
+			<Suspense fallback={<LoadingScreen />}>
+				<AnimatePresence mode="wait">
+					{!gameStarted && (
+						<motion.div
+							key="initial"
+							initial={{ opacity: 0 }}
+							animate={{ opacity: 1 }}
+							exit={{ opacity: 0 }}
+							transition={{ duration: 0.5 }}>
+							<InitialFlagContainer onStartClick={handleStartClick} />
+						</motion.div>
+					)}
+
+					{gameStarted && !isGameFinished && (
+						<motion.div
+							key="game"
+							initial={{ opacity: 0, y: 50 }}
+							animate={{ opacity: 1, y: 0 }}
+							exit={{ opacity: 0, y: -50 }}
+							transition={{ duration: 0.5 }}>
+							<GuessCard
+								onGameFinish={handleGameFinish}
+								selectedContinent={selectedContinent}
+								flagCount={flagCount}
+							/>
+						</motion.div>
+					)}
+
+					{isGameFinished && (
+						<motion.div
+							key="finish"
+							initial={{ opacity: 0, scale: 0.8 }}
+							animate={{ opacity: 1, scale: 1 }}
+							exit={{ opacity: 0, scale: 0.8 }}
+							transition={{ duration: 0.5 }}>
+							<FinishCard
+								gameStats={gameStats}
+								onRestartClick={handleRestartClick}
+								selectedContinent={selectedContinent}
+							/>
+						</motion.div>
+					)}
+				</AnimatePresence>
+			</Suspense>
 		</div>
 	);
 }

@@ -1,432 +1,201 @@
-body {
-    background-color: rgb(171, 171, 171);
-    width: 100%;
-    height: 100%;
+.initial-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 20px;
+  position: relative;
+  overflow: hidden;
 }
 
-@font-face {
-    font-family: 'Caros Light';
-    src: url('https://db.onlinewebfonts.com/t/9180dec2cdd1711edd6b8d86954aae05.eot');
-    src: url('https://db.onlinewebfonts.com/t/9180dec2cdd1711edd6b8d86954aae05.eot?#iefix') format('embedded-opentype'),
-        url('https://db.onlinewebfonts.com/t/9180dec2cdd1711edd6b8d86954aae05.woff2') format('woff2'),
-        url('https://db.onlinewebfonts.com/t/9180dec2cdd1711edd6b8d86954aae05.woff') format('woff'),
-        url('https://db.onlinewebfonts.com/t/9180dec2cdd1711edd6b8d86954aae05.ttf') format('truetype'),
-        url('https://db.onlinewebfonts.com/t/9180dec2cdd1711edd6b8d86954aae05.svg#Caros Light') format('svg');
+.world-map-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  overflow: hidden;
 }
 
-.card {
-    margin-top: 3% !important;
-    margin-left: 6% !important;
-    margin-right: 6% !important;
-    margin-bottom: 0;
-    border-radius: 10px;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    background-color: rgb(208, 208, 208);
-    box-sizing: border-box;
-    height: 90vh !important;
+.world-map {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.15;
 }
 
-.bgimg {
-    display: flex;
-    flex-direction: column;
-    border-radius: 10px;
-    display: flex;
-    justify-content: center;
-    /* background-image: url("pk.png"); */
-    align-items: center;
-    width: 100%;
-    height: 100%;
-    overflow: hidden; 
+.selection-card {
+  background-color: var(--card-background);
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  padding: 30px;
+  width: 100%;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
 }
 
-.bgimg img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+.game-title {
+  font-size: 2.5rem;
+  color: var(--primary-color);
+  text-align: center;
+  margin-bottom: 10px;
+  font-weight: 700;
 }
 
-/* ///////////////note:: startbox style///////////////////////// */
-
-.Theh1 {
-    color: rgb(0, 0, 0);
-    padding: 5px;
-    font-size: 25px;
-    font-weight: bold;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    font-family: 'Caros Light', sans-serif;
+.selection-section {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
-.outer-container {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: rgba(255, 255, 255, 0.646); 
-    border-radius: 6px;
+
+.selection-title {
+  font-size: 1.2rem;
+  color: var(--text-color);
+  font-weight: 600;
+}
+
+.continent-options {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 10px;
+}
+
+.continent-option {
+  padding: 12px;
+  background-color: var(--background-color);
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--text-color);
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.continent-option.selected {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.flag-count-slider {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+
+.slider {
+  width: 100%;
+  height: 8px;
+  background: #ddd;
+  border-radius: 5px;
+  outline: none;
+  -webkit-appearance: none;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  background: var(--primary-color);
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.flag-count {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+.start-button {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 15px 30px;
+  border-radius: 30px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.start-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.button-arrow {
+  display: inline-block;
+}
+
+/* Desktop-specific styles */
+@media (min-width: 1024px) {
+  .initial-container {
+    padding: 0;
+  }
+
+  .world-map {
+    width: 100vw;
+    height: 100vh;
+    object-position: center;
+  }
+
+  .selection-card {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+  }
+
+  .continent-options {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .selection-card {
+    padding: 20px;
+  }
+
+  .game-title {
+    font-size: 2rem;
+  }
+
+  .continent-options {
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  }
+
+  .start-button {
+    padding: 12px 24px;
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .selection-card {
+    padding: 15px;
+  }
+
+  .game-title {
+    font-size: 1.8rem;
+  }
+
+  .continent-options {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .continent-option {
     padding: 10px;
-    z-index: 1;
-    text-align: center;
-    width: 40% !important; 
-}
-/* ////////////////note:: radio btn options//////////////////// */
-.select-text {
-    font-size: 18px;
-    font-weight: bold;
-    text-align: center;
-    margin-bottom: 6px;
-    font-family: 'Caros Light', sans-serif;
-}
+    font-size: 0.9rem;
+  }
 
-.select-text::before {
-    content: '🌍';
-    margin-right: 10px; 
-}
-
-.container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.option-container {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start; 
-    padding: 8px;
-    padding-left: 36px;
-    padding-right: 36px;
-    margin-bottom: 12px;
-    border-radius: 10px;
-    background-color: #f0f0f0;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.option-container input[type='radio'] {
-    display: none;
-}
-
-.option-container label {
-    display: flex; 
-    align-items: center;
-    margin: 6px 0;
-    cursor: pointer;
-    font-size: 16px;
-    font-family: 'Caros Light', sans-serif;
-}
-
-.option-container label:hover {
-    color: #007bff; 
-}
-
-.option-container input[type='radio'] + label:before {
-    content: '';
-    display: inline-block;
-    width: 20px;
-    height: 20px;
-    margin-right: 10px;
-    border: 2px solid #007bff;
-    border-radius: 50%;
-}
-
-.option-container input[type='radio']:checked + label:before {
-    background-color: #007bff;
-}
-
-/* ////////////////note:: radio btn options//////////////////// */
-
-.startbtn {
-    font-weight: bolder;
-    color: white;
-    width: 100%;
-    background-color: rgba(9, 211, 69, 0.748);
-    border-radius: 6px;
-    border-color: rgba(9, 211, 69, 0.748);
-    font-size: 20px;
-    font-family: 'Caros Light', sans-serif;
-}
-.startbtn:hover {
-    background-color: rgba(10, 232, 77, 0.748);
-    outline: none;
-}
-.startbtn:focus {
-    outline: none;
-}
-
-.question-text {
-    margin-top: 2px;
-    display: flex;
-    font-size: 10px;
-}
-
-.correct {
-    background-color: green;
-}
-
-.incorrect {
-    background-color: red;
-}
-
-/* //////////////////////////////////////// */
-@media screen and (min-width: 280px) and (max-width: 400px) {
-    .card {
-        padding: 12px;
-        height: 200px !important;
-    }
-    .bgimg img {
-        /* background-color: rgb(0, 255, 4); */
-        width: 100%;
-        height: 130% !important;
-        object-fit: fill !important;
-    }
-
-    .Theh1 {
-        padding: 0;
-        margin: 0;
-        padding: 5px;
-        font-size: 10px !important;
-    }
-    .outer-container {
-        width: 65% !important; 
-        height: 80% !important;
-    }
-    .startbtn {
-        margin-top: 0 !important;
-        width: 50% !important;
-        left: 30% !important;
-        font-size: 8px !important;
-    }
-    .select-text {
-        font-size: 6px;
-    }
-
-    .option-container {
-        padding: 4x;
-        margin-bottom: 0;
-        padding-left: 10px;
-        padding-right: 10px;
-    }
-
-    .option-container label {
-        margin: 1px 0;
-        font-size: 5px;
-    }
-
-    .option-container input[type='radio'] + label:before {
-        width: 5px;
-        height: 5px;
-        margin-right: 10px;
-    }
-    .question-text {
-        font-size: 6px;
-    }
-}
-
-@media screen and (min-width: 400px) and (max-width: 550px) {
-    .card {
-        padding: 12px;
-        height: 300px !important;
-    }
-    .bgimg img {
-        /* background-color: rgb(0, 255, 4); */
-        width: 100%;
-        height: 130% !important;
-        object-fit: fill !important;
-    }
-
-    .Theh1 {
-        padding: 0;
-        margin: 0;
-        padding: 5px;
-        font-size: 16px !important;
-    }
-    .outer-container {
-        width: 55% !important; 
-        height: 70% !important;
-    }
-    .startbtn {
-        margin-top: 0 !important;
-        width: 40% !important;
-        left: 30% !important;
-        font-size: 10px !important;
-    }
-    .select-text {
-        font-size: 8px;
-    }
-
-    .option-container {
-        padding: 8px;
-        margin-bottom: 0;
-        padding-left: 13px;
-        padding-right: 13px;
-    }
-
-    .option-container label {
-        margin: 1px 0;
-        font-size: 8px;
-    }
-
-    .option-container input[type='radio'] + label:before {
-        width: 8px;
-        height: 8px;
-        margin-right: 8px;
-    }
-}
-@media screen and (min-width: 550px) and (max-width: 745px) {
-    .card {
-        padding: 12px;
-        height: 350px !important;
-    }
-    .bgimg img {
-        /* background-color: rgb(0, 255, 4); */
-        width: 100%;
-        height: 130% !important;
-        object-fit: fill !important;
-    }
-
-    .Theh1 {
-        padding: 0;
-        margin: 0;
-        padding: 5px;
-        font-size: 18px !important;
-    }
-    .outer-container {
-        width: 55% !important; 
-        height: 77% !important;
-    }
-    .startbtn {
-        margin-top: 5px !important;
-        width: 40% !important;
-        left: 30% !important;
-        font-size: 12px !important;
-    }
-    .select-text {
-        font-size: 10px;
-    }
-
-    .option-container {
-        padding: 8px;
-        margin-bottom: 0;
-        padding-left: 16px;
-        padding-right: 16px;
-    }
-
-    .option-container label {
-        margin: 2px 0;
-        font-size: 10px;
-    }
-
-    .option-container input[type='radio'] + label:before {
-        width: 10px;
-        height: 10px;
-        margin-right: 8px;
-    }
-    .question-text {
-        font-size: 10px;
-    }
-}
-@media screen and (min-width: 745px) and (max-width: 940px) {
-    .card {
-        padding: 12px;
-        height: 365px !important;
-    }
-    .bgimg img {
-        /* background-color: rgb(0, 255, 4); */
-        width: 100%;
-        height: 130% !important;
-        object-fit: fill !important;
-    }
-
-    .Theh1 {
-        padding: 0;
-        margin: 0;
-        padding: 5px;
-        font-size: 18px !important;
-    }
-    .outer-container {
-        width: 45% !important; 
-        height: 75% !important;
-    }
-    .startbtn {
-        margin-top: 5px !important;
-        width: 40% !important;
-        left: 30% !important;
-        font-size: 12px !important;
-    }
-    .select-text {
-        font-size: 10px;
-    }
-
-    .option-container {
-        padding: 8px;
-        margin-bottom: 0;
-        padding-left: 20px;
-        padding-right: 20px;
-    }
-
-    .option-container label {
-        margin: 2px 0;
-        font-size: 10px;
-    }
-
-    .option-container input[type='radio'] + label:before {
-        width: 10px;
-        height: 10px;
-        margin-right: 8px;
-    }
-    .question-text {
-        font-size: 12px;
-    }
-}
-/* ///////////////////// */
-
-@media screen and (min-width: 1024px) and (max-width: 1044px) {
-    .option-container label {
-        margin: 7px 0;
-        font-size: 15px;
-    }
-}
-
-/* //////////////////////// */
-@media screen and (min-width: 940px) and (max-width: 1366px) {
-    .card {
-        /* padding: 12px; */
-        height: 100% !important;
-    }
-    .bgimg img {
-        /* background-color: rgb(0, 255, 4); */
-        width: 100%;
-        height: 100% !important;
-        object-fit: fill !important;
-    }
-    .option-container {
-        padding: 8px;
-        margin-bottom: 3%;
-        padding-left: 50px;
-        padding-right: 50px;
-    }
-
-    .outer-container {
-        width: 50% !important;
-    }
-    .bgimg {
-        width: 100%;
-    }
-    .bgimg img {
-        object-fit: contain;
-    }
-    .question-text {
-        font-size: 15px;
-    }
-}
-
-@media screen and (min-width: 280px) and (max-width: 586px) {
-    .Theh1 {
-        padding: 0;
-        margin: 0;
-        font-size: 12px;
-    }
+  .start-button {
+    padding: 10px 20px;
+    font-size: 1rem;
+  }
 }

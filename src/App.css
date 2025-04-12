@@ -1,8 +1,74 @@
-
-.card {
-    padding: 2em;
+:root {
+  --primary-color: #0098db;
+  --secondary-color: #0ead9f;
+  --accent-color: #ff6b6b;
+  --background-color: #f0f0f0;
+  --card-background: #ffffff;
+  --text-color: #333333;
+  --light-text: #666666;
+  --border-radius: 12px;
+  --box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
 }
 
-.read-the-docs {
-    color: #888;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.app-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 20px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+button:focus {
+  outline: none;
+}
+
+.card {
+  background-color: var(--card-background);
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+}
+
+@media (max-width: 768px) {
+  .app-container {
+    padding: 10px;
+  }
+}
+
+/* Desktop-specific styles */
+@media (min-width: 1024px) {
+  .app-container {
+    padding: 0;
+    height: 100vh;
+  }
 }

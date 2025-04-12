@@ -1,270 +1,243 @@
-.card {
-    margin-top: 3%;
-    border-radius: 10px;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    background-color: rgb(208, 208, 208);
-    box-sizing: border-box;
-    margin-left: 6%;
-    margin-right: 6%;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.119);
+.finish-card-container {
+  background-color: var(--card-background);
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  padding: 40px;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+  text-align: center;
 }
 
-@font-face {
-    font-family: "Caros Light";
-    src: url("https://db.onlinewebfonts.com/t/9180dec2cdd1711edd6b8d86954aae05.eot");
-    src: url("https://db.onlinewebfonts.com/t/9180dec2cdd1711edd6b8d86954aae05.eot?#iefix") format("embedded-opentype"),
-        url("https://db.onlinewebfonts.com/t/9180dec2cdd1711edd6b8d86954aae05.woff2") format("woff2"),
-        url("https://db.onlinewebfonts.com/t/9180dec2cdd1711edd6b8d86954aae05.woff") format("woff"),
-        url("https://db.onlinewebfonts.com/t/9180dec2cdd1711edd6b8d86954aae05.ttf") format("truetype"),
-        url("https://db.onlinewebfonts.com/t/9180dec2cdd1711edd6b8d86954aae05.svg#Caros Light") format("svg");
+.finish-title {
+  font-size: 2.5rem;
+  color: var(--primary-color);
+  font-weight: 700;
+  margin-bottom: 10px;
 }
 
-.img-container {
-    border-radius: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
+.score-circle {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  box-shadow: 0 10px 20px rgba(0, 152, 219, 0.3);
 }
 
-.img-container img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+.score-percentage {
+  font-size: 2.5rem;
+  font-weight: 700;
+  line-height: 1;
 }
 
-/* FinishCard Styles */
-.outer-card {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.score-label {
+  font-size: 1rem;
+  opacity: 0.9;
 }
 
-.inner-card {
-    width: 80%;
-    line-height: 30px;
-    background-color: #f0f0f0;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.149);
-    border-radius: 10px;
-    padding: 20px;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
+.performance-message {
+  font-size: 1.3rem;
+  color: var(--text-color);
+  font-weight: 500;
+  max-width: 80%;
 }
 
-.card-title {
-    margin-top: 0;
-    font-family: "Caros Light", sans-serif;
-    font-weight: bolder;
+.stats-container {
+  width: 100%;
+  background-color: var(--background-color);
+  border-radius: 12px;
+  padding: 25px;
 }
 
-.score-details {
-    text-align: left;
-    margin-bottom: 18px;
+.stats-title {
+  font-size: 1.5rem;
+  color: var(--text-color);
+  margin-bottom: 20px;
+  font-weight: 600;
 }
 
-.score-details p {
-    margin: 5px 0;
-    font-family: "Caros Light", sans-serif;
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 15px;
 }
 
-.score-details span {
-    font-weight: bold;
-    font-family: "Caros Light", sans-serif;
+.stat-card {
+  background-color: white;
+  border-radius: 10px;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease;
 }
 
-.play-again-btn {
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    font-family: "Caros Light", sans-serif;
+.stat-card:hover {
+  transform: translateY(-5px);
 }
 
-.play-again-btn:hover {
-    background-color: #0056b3;
-    outline: none;
+.stat-icon {
+  font-size: 1.8rem;
+  margin-bottom: 5px;
 }
 
-.play-again-btn:focus {
-    outline: none;
+.stat-value {
+  font-size: 1.8rem;
+  font-weight: 700;
+  line-height: 1;
 }
 
-@media screen and (min-width: 1024px) and (max-width: 1366px) {
-    .outer-container {
-        width: 75%;
-    }
-
-    .img-container,
-    .img-container img {
-        width: 65% !important;
-    }
+.stat-label {
+  font-size: 0.9rem;
+  color: var(--light-text);
+  margin-top: 5px;
 }
 
-/* Table properties */
-.table-container {
-    width: auto;
-    margin: 0 auto;
+.stat-card.total .stat-value {
+  color: var(--primary-color);
 }
 
-.table {
-    border-collapse: collapse;
-    width: 100%;
-    border: 2px solid #f0f0f0;
-    border-radius: 8px;
+.stat-card.attempted .stat-value {
+  color: #9b59b6;
 }
 
-.table th,
-.table td {
+.stat-card.correct .stat-value {
+  color: #2ecc71;
+}
+
+.stat-card.incorrect .stat-value {
+  color: #e74c3c;
+}
+
+.stat-card.skipped .stat-value {
+  color: #f39c12;
+}
+
+.play-again-button {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 15px 40px;
+  border-radius: 30px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-top: 10px;
+  box-shadow: 0 5px 15px rgba(0, 152, 219, 0.3);
+}
+
+/* Desktop-specific styles */
+@media (min-width: 1024px) {
+  .finish-card-container {
+    max-width: 1000px;
+    padding: 50px;
+  }
+
+  .stats-container {
+    padding: 30px;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .finish-card-container {
+    padding: 30px 20px;
+  }
+
+  .finish-title {
+    font-size: 2rem;
+  }
+
+  .score-circle {
+    width: 120px;
+    height: 120px;
+  }
+
+  .score-percentage {
+    font-size: 2rem;
+  }
+
+  .performance-message {
+    font-size: 1.1rem;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .play-again-button {
+    padding: 12px 30px;
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .finish-card-container {
+    padding: 20px 15px;
+  }
+
+  .finish-title {
+    font-size: 1.8rem;
+  }
+
+  .score-circle {
+    width: 100px;
+    height: 100px;
+  }
+
+  .score-percentage {
+    font-size: 1.8rem;
+  }
+
+  .performance-message {
+    font-size: 1rem;
+    max-width: 95%;
+  }
+
+  .stats-title {
+    font-size: 1.3rem;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .stat-card {
     padding: 10px;
-    padding-left: 5%;
-    border-bottom: 8px solid #f0f0f0;
-    font-family: "Caros Light", sans-serif;
-}
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: left;
+  }
 
-.table th {
-    font-weight: 500;
-    background-color: #1b83acda;
-    color: #fff;
-}
+  .stat-icon {
+    font-size: 1.5rem;
+    margin-bottom: 0;
+  }
 
-.table td {
-    font-weight: 600;
-    background-color: #0ead9f;
-    color: #fff;
-}
+  .stat-value {
+    font-size: 1.5rem;
+  }
 
-@media screen and (min-width: 280px) and (max-width: 400px) {
-    .card-title {
-        font-size: 12px;
-    }
-    .inner-card {
-        height: 110% !important;
-        width: 75% !important;
-    }
-    .score-details {
-        margin-bottom: -10px !important;
-    }
+  .stat-details {
+    display: flex;
+    flex-direction: column;
+  }
 
-    .table th,
-    .table td {
-        padding: 2px !important;
-        font-size: 8px;
-        border-bottom: 8px solid #f0f0f0;
-        line-height: 12px;
-    }
-
-    .outer-container {
-        width: 75%;
-    }
-
-    .play-again-btn {
-        padding: 3px !important;
-        font-size: 8px;
-    }
-
-    .img-container,
-    .img-container img {
-        width: 65% !important;
-    }
-}
-
-@media screen and (min-width: 400px) and (max-width: 550px) {
-    .card-title {
-        font-size: 16px;
-    }
-    .inner-card {
-        height: 84% !important;
-        width: 75% !important;
-    }
-    .score-details {
-        margin-bottom: 0 !important;
-    }
-
-    .table th,
-    .table td {
-        padding: 4px !important;
-        font-size: 9px;
-        border-bottom: 8px solid #f0f0f0;
-        line-height: 14px;
-    }
-
-    .outer-container {
-        width: 75%;
-    }
-
-    .play-again-btn {
-        padding: 3px !important;
-        font-size: 8px;
-    }
-
-    .img-container,
-    .img-container img {
-        width: 65% !important;
-    }
-}
-
-@media screen and (min-width: 550px) and (max-width: 800px) {
-    .card-title {
-        font-size: 20px;
-    }
-    .inner-card {
-        height: 90% !important;
-        width: 75% !important;
-    }
-    .score-details {
-        margin-bottom: 2px !important;
-    }
-
-    .table th,
-    .table td {
-        padding: 6px !important;
-        font-size: 12px;
-        border-bottom: 8px solid #f0f0f0;
-        line-height: 14px;
-    }
-
-    .outer-container {
-        width: 75%;
-    }
-
-    .play-again-btn {
-        padding: 5px !important;
-        font-size: 10px;
-    }
-
-    /* Component 2 adjustments */
-    .img-container,
-    .img-container img {
-        width: 65% !important;
-    }
-}
-
-@media screen and (min-width: 800px) and (max-width: 940px) {
-    .inner-card {
-        height: 100%;
-        width: 70%;
-    }
-
-    .table th,
-    .table td {
-        padding: 5px;
-    }
-
-    .outer-container {
-        width: 75%;
-    }
-
-    .img-container,
-    .img-container img {
-        width: 65% !important;
-    }
+  .play-again-button {
+    padding: 10px 25px;
+    font-size: 1rem;
+    width: 100%;
+  }
 }
