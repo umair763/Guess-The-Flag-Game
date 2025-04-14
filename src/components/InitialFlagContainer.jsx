@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import "./InitialFlagContainer.css";
+import bg from './World countries flags stock illustration.jpeg';
 
 function InitialFlagContainer({ onStartClick }) {
 	const [selectedContinent, setSelectedContinent] = useState("");
@@ -27,7 +28,7 @@ function InitialFlagContainer({ onStartClick }) {
                 animate={{ opacity: 0.9 }}
                 transition={{ duration: 0.5 }}>
                 <img
-                    src="./src/components/World countries flags stock illustration.jpeg"
+                    src={bg}
                     alt="World Map"
                     className="world-map"
                     style={{ opacity: 0.8 }}
