@@ -174,4 +174,4 @@ setGameStats((prev) => ({
 
 ## Project Links
 
-You can access the deployed web application here: [Web App Link]([https://guess-the-flag-game-one.vercel.app/)
+You can access the deployed web application here: [Web App Link](https://guess-the-flag-game-one.vercel.app/)
