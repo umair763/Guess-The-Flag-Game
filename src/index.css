@@ -1,32 +1,7 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+@layer base {
+  html,
+  body {
+    @apply h-screen w-screen overflow-hidden m-0 p-0;
+  }
 }
-
-:root {
-  --primary-color: #0098db;
-  --secondary-color: #0ead9f;
-  --accent-color: #ff6b6b;
-  --background-color: #f0f0f0;
-  --card-background: #ffffff;
-  --text-color: #333333;
-  --light-text: #666666;
-  --border-radius: 12px;
-  --box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
-}
-
-body {
-  font-family: "Poppins", sans-serif;
-  background-color: var(--background-color);
-  color: var(--text-color);
-  min-height: 100vh;
-}
-
-#root {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
+@import "tailwindcss";
