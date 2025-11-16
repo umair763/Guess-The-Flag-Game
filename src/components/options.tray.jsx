@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Globe, Flag } from "lucide-react"; // Make sure lucide-react is installed
-import { availableFlags, getFlagOptions } from "../utils/gameUtils";
+import { Globe } from "lucide-react";
+import { getCountryCount, getFlagOptions } from "../utils/gameUtils";
 
 const continents = [
   { name: "Africa", icon: Globe },
@@ -15,10 +15,55 @@ const continents = [
 
 export const OptionsTray = () => {
   const [selectedContinent, setSelectedContinent] = useState(null);
+  const [availableCount, setAvailableCount] = useState(0);
   const [numFlags, setNumFlags] = useState(10);
+  const [flagOptions, setFlagOptions] = useState([10, 20, 30, 40, 50]);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  const flagOptions = selectedContinent ? getFlagOptions(selectedContinent) : [10, 20, 30, 40, 50];
+  // Fetch country count when continent is selected
+  useEffect(() => {
+    if (!selectedContinent) {
+      setAvailableCount(0);
+      setFlagOptions([10, 20, 30, 40, 50]);
+      setNumFlags(10);
+      setLoading(false);
+      return;
+    }
+
+    const loadCount = async () => {
+      setLoading(true);
+      try {
+        console.log("Loading count for:", selectedContinent);
+        const count = await getCountryCount(selectedContinent);
+        console.log("Count received:", count);
+
+        if (count === 0) {
+          console.warn("No countries found for:", selectedContinent);
+          setAvailableCount(0);
+          setFlagOptions([10, 20, 30, 40, 50]);
+          setNumFlags(10);
+        } else {
+          setAvailableCount(count);
+          const options = getFlagOptions(count);
+          console.log("Flag options:", options);
+
+          setFlagOptions(options);
+          setNumFlags(options[0]); // Set to minimum
+        }
+      } catch (error) {
+        console.error("Error loading count:", error);
+        alert("Failed to load countries. Please try again.");
+        setAvailableCount(0);
+        setFlagOptions([10, 20, 30, 40, 50]);
+        setNumFlags(10);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadCount();
+  }, [selectedContinent]);
 
   // Helper to snap slider to nearest allowed value
   const snapToOption = (val) => {
@@ -27,10 +72,6 @@ export const OptionsTray = () => {
 
   const handleContinentSelect = (continent) => {
     setSelectedContinent(continent);
-    // Adjust number of flags if continent doesn't have enough
-    if (numFlags > availableFlags[continent]) {
-      setNumFlags(availableFlags[continent]);
-    }
   };
 
   return (
@@ -66,7 +107,12 @@ export const OptionsTray = () => {
               }`}
           >
             <Icon className="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8 mb-1 sm:mb-2" />
-            {name}
+            <div>{name}</div>
+            {selectedContinent === name && (
+              <div className="text-xs text-yellow-200 mt-1">
+                {loading ? "Loading..." : availableCount > 0 ? `${availableCount} countries` : "Loading..."}
+              </div>
+            )}
           </motion.button>
         ))}
       </motion.div>
@@ -111,23 +157,31 @@ export const OptionsTray = () => {
 
       {/* Start Game Button */}
       <motion.button
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
-        className="bg-yellow-400 cursor-pointer text-gray-900 px-4 py-2 sm:px-6 sm:py-3 md:px-8 md:py-3 rounded-lg sm:rounded-xl font-bold text-base sm:text-lg shadow-lg hover:bg-yellow-500 transition"
+        whileHover={!loading && selectedContinent ? { scale: 1.05 } : {}}
+        whileTap={!loading && selectedContinent ? { scale: 0.95 } : {}}
+        disabled={loading || !selectedContinent || availableCount === 0}
+        className={`px-4 py-2 sm:px-6 sm:py-3 md:px-8 md:py-3 rounded-lg sm:rounded-xl font-bold text-base sm:text-lg shadow-lg transition ${
+          loading || !selectedContinent || availableCount === 0
+            ? "bg-gray-400 cursor-not-allowed text-gray-700"
+            : "bg-yellow-400 cursor-pointer text-gray-900 hover:bg-yellow-500"
+        }`}
         onClick={() => {
-          if (selectedContinent) {
+          if (selectedContinent && availableCount > 0 && !loading) {
+            console.log("Starting game with:", { continent: selectedContinent, numFlags });
             navigate("/game", {
               state: {
                 continent: selectedContinent,
                 numFlags,
               },
             });
-          } else {
+          } else if (!selectedContinent) {
             alert("Please select a continent!");
+          } else if (availableCount === 0) {
+            alert("No countries available for this continent. Please try another.");
           }
         }}
       >
-        Start Game
+        {loading ? "Loading..." : "Start Game"}
       </motion.button>
     </div>
   );

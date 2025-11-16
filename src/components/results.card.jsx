@@ -1,18 +1,21 @@
 import React from "react";
 import { CheckCircle, XCircle, Clock, ClipboardList, Pencil } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export const ResultsCard = () => {
   const navigate = useNavigate();
-  const results = {
+  const location = useLocation();
+  const passedResults = location?.state?.results;
+
+  const results = passedResults || {
     total: 10,
-    attempted: 9,
-    skipped: 1,
-    correct: 7,
-    wrong: 2,
+    attempted: 0,
+    skipped: 0,
+    correct: 0,
+    wrong: 0,
   };
 
-  const scorePercent = ((results.correct / results.total) * 100).toFixed(0);
+  const scorePercent = results.total > 0 ? Math.round((results.correct / results.total) * 100) : 0;
   const radius = 60;
   const stroke = 10;
   const normalizedRadius = radius - stroke * 2;
