@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { FlagInfoCard } from "./flag.info.card";
 import { motion } from "framer-motion";
 import { generateQuestionSet, getCountryByName } from "../utils/gameUtils";
+import { ArrowRight, ArrowUp } from "lucide-react";
 
 export const GameBoard = () => {
   const location = useLocation();
@@ -135,14 +136,14 @@ export const GameBoard = () => {
     <div className="w-full bg-gray-900 overflow-x-hidden">
       <div className="min-h-screen w-full max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 items-center gap-6 px-4 sm:px-6 md:px-12">
         {/* Left section: Flag and Info Card as separate rows */}
-        <div className="flex flex-col items-center justify-center h-full w-full">
+        <div className="flex flex-col items-center justify-center h-full w-full -mt-12">
           {/* Progress indicator */}
           <div className="text-white text-sm mb-1 font-semibold">
             Question {currentIndex + 1} of {questions.length}
           </div>
 
           <motion.div
-            className="flex items-center justify-center bg-white/10 backdrop-blur-md rounded-2xl p-0 shadow-lg w-full mx-auto"
+            className="flex items-center justify-center rounded-2xl p-0 shadow-lg w-full mx-auto"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
@@ -182,14 +183,18 @@ export const GameBoard = () => {
             {currentQuestion.options.map((option) => (
               <motion.button
                 key={option}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className={`font-semibold py-3 px-4 rounded-lg shadow-md transition ${
-                  selectedOption === option
-                    ? "bg-blue-500 text-white border-2 border-blue-300"
-                    : "bg-yellow-400 text-gray-900 hover:bg-yellow-500"
-                }`}
+                whileHover={{ scale: 1.08, boxShadow: "0 0 10px rgba(20, 184, 166, 0.25)" }}
+                whileTap={{ scale: 0.97 }}
+                className={`font-semibold py-3 px-4 rounded-xl shadow-lg transition-all cursor-pointer focus:outline-none focus:ring-2 focus:ring-teal-400
+                  ${
+                    selectedOption === option
+                      ? "bg-teal-500 text-white border-2 border-teal-300 ring-2 ring-teal-400"
+                      : "bg-yellow-300 text-gray-900 hover:bg-yellow-400 hover:shadow-xl"
+                  }
+                `}
                 onClick={() => handleOptionClick(option)}
+                aria-pressed={selectedOption === option}
+                tabIndex={0}
               >
                 {option}
               </motion.button>
@@ -197,22 +202,36 @@ export const GameBoard = () => {
           </div>
 
           {/* Next / Skip Buttons */}
-          <div className="flex justify-end gap-4 mt-2">
+          <div className="flex justify-center gap-6 mt-6 select-none">
+            {/* Skip Button */}
             <motion.button
-              whileHover={{ scale: 1.05 }}
+              whileHover={{ scale: 1.08, boxShadow: "0 0 12px rgba(0, 150, 255, 0.6)" }}
               whileTap={{ scale: 0.95 }}
               onClick={handleSkip}
-              className="bg-gray-600 text-white py-2 px-4 rounded-lg shadow-md hover:bg-gray-700 transition"
+              className="relative px-10 py-3 rounded-full font-semibold text-base text-cyan-300 bg-gray-900/40 border border-cyan-400/40 backdrop-blur-md transition-all hover:bg-gray-800/60 overflow-hidden cursor-pointer flex items-center justify-center gap-2"
             >
-              Skip
+              <span className="relative z-10 tracking-wide">Skip</span>
+              <ArrowUp size={22} className="text-cyan-300" />
+              {/* Neon Glow Line */}
+              <span className="absolute top-0 left-0 w-full h-0.5 bg-cyan-400/70 blur-sm"></span>
             </motion.button>
+
+            {/* Next Button */}
             <motion.button
-              whileHover={{ scale: 1.05 }}
+              whileHover={{ scale: 1.1, boxShadow: "0 0 14px rgba(0, 255, 150, 0.65)" }}
               whileTap={{ scale: 0.95 }}
               onClick={handleNext}
-              className="bg-green-500 text-white py-2 px-4 rounded-lg shadow-md hover:bg-green-600 transition"
+              className="relative px-12 py-3 rounded-full font-bold text-base text-black bg-emerald-400 border border-emerald-300/60 shadow-lg hover:bg-emerald-300 transition-all overflow-hidden cursor-pointer flex items-center justify-center gap-2"
             >
-              Next
+              <span className="relative z-10 tracking-wider">Next</span>
+              <ArrowRight size={22} className="text-emerald-700" />
+              {/* Animated Glow Behind */}
+              <motion.span
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 0.4 }}
+                transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
+                className="absolute inset-0 bg-emerald-300 blur-xl"
+              />
             </motion.button>
           </div>
         </motion.div>
