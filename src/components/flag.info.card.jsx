@@ -23,11 +23,11 @@ export const FlagInfoCard = ({ country }) => {
         className="absolute inset-0 rounded-2xl pointer-events-none"
         style={{ boxShadow: "0 0 60px 0px rgba(255, 255, 0, 0.08)" }}
       ></div>
-      <h3 className="text-lg font-bold mb-2 text-center text-yellow-300 drop-shadow-lg tracking-wide">
+      <h3 className="text-xs sm:text-base md:text-base lg:text-lg font-bold mb-2 text-center text-yellow-300 drop-shadow-lg tracking-wide">
         Hint (Country Details)
       </h3>
       {/* Info - DO NOT show country name */}
-      <div className="space-y-2 text-sm sm:text-base">
+      <div className="space-y-2 text-xs sm:text-base md:text-base lg:text-base">
         <div className="flex justify-between items-center border-b border-yellow-200/30 pb-1">
           <span className="font-semibold text-yellow-100">Capital:</span>
           <span className="text-yellow-50">{capital || "Unknown"}</span>
