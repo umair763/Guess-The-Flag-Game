@@ -27,7 +27,7 @@ export const FlagInfoCard = ({ country }) => {
         Hint (Country Details)
       </h3>
       {/* Info - DO NOT show country name */}
-      <div className="space-y-2 text-xs sm:text-base md:text-base lg:text-base">
+      <div className="space-y-1 md:space-y-2 lg:space-y-2 xl:space-y-2 text-xs sm:text-base md:text-base lg:text-base">
         <div className="flex justify-between items-center border-b border-yellow-200/30 pb-1">
           <span className="font-semibold text-yellow-100">Capital:</span>
           <span className="text-yellow-50">{capital || "Unknown"}</span>

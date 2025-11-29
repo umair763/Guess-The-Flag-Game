@@ -23,14 +23,10 @@ export const ResultsCard = () => {
   const strokeDashoffset = circumference - (scorePercent / 100) * circumference;
 
   return (
-    <div className="bg-gray-900/70 backdrop-blur-xl rounded-3xl p-3 sm:p-6 mx-auto text-white shadow-xl w-full max-w-full sm:max-w-md md:max-w-2xl lg:max-w-3xl -mt-16">
+    <div className="min-w-[18rem] max-w-7xl mx-auto bg-gray-900 overflow-x-hidden rounded-xl p-6 -mt-20">
       {/* Circular Globe / Progress */}
-      <div className="flex justify-center mb-4 sm:mb-6 relative">
-        <svg
-          height={radius * 1.2}
-          width={radius * 1.2}
-          className="transform -rotate-90 w-30 h-30"
-        >
+      <div className="flex justify-center mb-4 sm:mb-6 relative text-white">
+        <svg height={radius * 1.2} width={radius * 1.2} className="transform -rotate-90 w-30 h-30">
           <circle
             stroke="#1E3A8A"
             fill="transparent"
@@ -59,7 +55,7 @@ export const ResultsCard = () => {
       </div>
 
       {/* Results Grid */}
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2 sm:gap-4 md:gap-6 text-xs sm:text-base">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2 sm:gap-4 md:gap-6 text-xs sm:text-base text-gray-200">
         <div className="flex flex-col items-center justify-center bg-gray-800/50 rounded-xl p-3 hover:bg-gray-700/70 transition">
           <ClipboardList className="w-6 h-6 text-blue-400 mb-1" />
           <div className="font-semibold">Total MCQs</div>

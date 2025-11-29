@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import logo from "../../assets/images/logo.png";
 
 export const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -9,7 +10,7 @@ export const Header = () => {
     <header className="mx-auto fixed top-0 left-1/2 transform -translate-x-1/2 w-full z-50 bg-white/10 backdrop-blur-md border border-gray-700 rounded-bl-4xl rounded-br-4xl shadow-md">
       <div className="px-6 py-4 flex items-center justify-between">
         {/* Logo */}
-        <div className="text-xl font-bold text-white">MyLogo</div>
+        <img src={logo} alt="Guess The Flag" className="h-10 w-10 md:h-12 md:w-12 object-contain" />
 
         {/* Desktop nav */}
         <nav className="hidden md:flex space-x-6 text-white ml-auto">

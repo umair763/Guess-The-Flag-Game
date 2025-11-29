@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { FlagInfoCard } from "./flag.info.card";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { generateQuestionSet, getCountryByName } from "../utils/gameUtils";
 import { ArrowRight, ArrowUp } from "lucide-react";
 
@@ -133,12 +133,12 @@ export const GameBoard = () => {
   }
 
   return (
-    <div className="w-full bg-gray-900 overflow-x-hidden min-h-screen">
-      <div className="min-h-screen w-full max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 items-center gap-6 px-2 sm:px-3 md:px-6">
+    <div className="w-full flex items-center justify-center min-h-screen -mt-3">
+      <div className="bg-black rounded-3xl w-12/12 md:w-full max-w-7xl grid grid-cols-1 md:grid-cols-2 items-start md:items-center gap-2 sm:gap-4 md:gap-6 px-3 sm:px-4 md:px-8 py-6 md:py-8 shadow-2xl h-fit">
         {/* Left section: Flag and Info Card as separate rows */}
-        <div className="flex flex-col items-center justify-center h-full w-full -mt-6 sm:-mt-12">
+        <div className="flex flex-col items-center justify-center h-full w-full md:-mt-12">
           {/* Progress indicator */}
-          <div className="text-white text-xs sm:text-sm mb-1 font-semibold">
+          <div className="text-white bg-transparent md:text-black lg:text-black xl:text-black sm:bg-yellow-400 md:bg-yellow-400 lg:bg-yellow-400 xl:bg-yellow-400  text-xs sm:text-sm mb-1 sm:mb-3 font-semibold text-center">
             Question {currentIndex + 1} of {questions.length}
           </div>
 
@@ -154,37 +154,35 @@ export const GameBoard = () => {
               alt="Flag"
               className={`w-full object-contain transition-all duration-300`}
               animate={{ height: showInfo ? "9.5rem" : "18rem" }}
-              style={{ maxHeight: "32vw", minHeight: "4rem" }}
+              style={{ maxHeight: "38vw", minHeight: "6rem" }}
             />
           </motion.div>
-          {showInfo && hintData && (
-            <motion.div
-              className="w-full max-w-xs sm:max-w-xl mx-auto flex justify-center mt-2 sm:mt-3"
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 40 }}
-              transition={{ duration: 0.4 }}
-            >
-              <div onClick={() => setShowInfo(false)} className="w-full cursor-pointer">
-                <FlagInfoCard country={hintData} />
-              </div>
-            </motion.div>
-          )}
+          <AnimatePresence>
+            {showInfo && hintData && (
+              <motion.div
+                className="w-full max-w-xs sm:max-w-xl mx-auto flex justify-center mt-2 sm:mt-3"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.3 }}
+              >
+                <div onClick={() => setShowInfo(false)} className="w-full cursor-pointer">
+                  <FlagInfoCard country={hintData} />
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
 
         {/* Right section: Options + Buttons */}
         <motion.div
-          className="flex flex-col justify-between bg-white/10 backdrop-blur-md rounded-2xl p-3 sm:p-6 shadow-lg"
+          className="flex flex-col justify-between bg-white/10 backdrop-blur-md rounded-2xl p-2 sm:p-6 shadow-lg w-full"
           initial={{ opacity: 0, x: 50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5 }}
         >
           {/* Options Grid */}
-          <div
-            className={`grid grid-cols-2 gap-2 sm:gap-4 mb-2 sm:mb-4 ${
-              showInfo ? "-mt-14 sm:mt-0 md:mt-0 lg:mt-0" : "mt-0 sm:mt-0 md:mt-0 lg:mt-0"
-            }`}
-          >
+          <div className="grid grid-cols-2 gap-2 sm:gap-4 mb-2 sm:mb-4 w-full ">
             {currentQuestion.options.map((option) => (
               <motion.button
                 key={option}
@@ -207,7 +205,7 @@ export const GameBoard = () => {
           </div>
 
           {/* Next / Skip Buttons */}
-          <div className="flex justify-center gap-4 sm:gap-6 mt-4 sm:mt-6 select-none mb-16 md:mb-0 lg:mb-0">
+          <div className="flex justify-center gap-4 sm:gap-6 select-none mb-16 md:mb-0 lg:mb-0 mt-0 md:mt-4 lg:mt-8 xl:mt-4">
             {/* Skip Button */}
             <motion.button
               whileHover={{ scale: 1.08, boxShadow: "0 0 12px rgba(0, 150, 255, 0.6)" }}

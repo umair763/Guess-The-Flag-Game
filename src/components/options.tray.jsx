@@ -75,7 +75,7 @@ export const OptionsTray = () => {
   };
 
   return (
-    <div className="bg-white/20 backdrop-blur-md rounded-2xl p-4 sm:p-6 md:p-8 shadow-lg w-full max-w-2xl flex flex-col items-center gap-4 sm:gap-6 md:gap-8 mt-6 mx-auto">
+    <div className="bg-white/20 backdrop-blur-md rounded-2xl p-4 sm:p-6 md:p-8 shadow-lg w-full max-w-2xl flex flex-col items-center gap-4 sm:gap-6 md:gap-8 mt-18 sm:mt-10 md:mt-10 lg:mt-10 xl:mt-10 mx-auto">
       {/* Title */}
       <motion.h1
         initial={{ opacity: 0, y: -20 }}
