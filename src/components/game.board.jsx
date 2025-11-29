@@ -159,7 +159,7 @@ export const GameBoard = () => {
           </motion.div>
           {showInfo && hintData && (
             <motion.div
-              className="w-full max-w-xs sm:max-w-xl mx-auto flex justify-center sm:mt-4"
+              className="w-full max-w-xs sm:max-w-xl mx-auto flex justify-center mt-2 sm:mt-3"
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 40 }}
@@ -180,7 +180,7 @@ export const GameBoard = () => {
           transition={{ duration: 0.5 }}
         >
           {/* Options Grid */}
-          <div className="grid grid-cols-2 gap-2 sm:gap-4 mb-2 sm:mb-4 -mt-22 md:mt-0 lg:mt-0 xl:mt-0">
+          <div className={`grid grid-cols-2 gap-2 sm:gap-4 mb-2 sm:mb-4 ${showInfo ? "-mt-3 sm:mt-0" : "mt-0 sm:mt-0"}`}>
             {currentQuestion.options.map((option) => (
               <motion.button
                 key={option}
