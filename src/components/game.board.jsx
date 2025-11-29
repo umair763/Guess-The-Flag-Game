@@ -180,7 +180,7 @@ export const GameBoard = () => {
           transition={{ duration: 0.5 }}
         >
           {/* Options Grid */}
-          <div className={`grid grid-cols-2 gap-2 sm:gap-4 mb-2 sm:mb-4 ${showInfo ? "-mt-3 sm:mt-0" : "mt-0 sm:mt-0"}`}>
+          <div className={`grid grid-cols-2 gap-2 sm:gap-4 mb-2 sm:mb-4 ${showInfo ? "-mt-4 sm:mt-0" : "mt-0 sm:mt-0"}`}>
             {currentQuestion.options.map((option) => (
               <motion.button
                 key={option}
